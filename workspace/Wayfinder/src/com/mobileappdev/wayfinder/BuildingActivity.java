@@ -39,21 +39,20 @@ public class BuildingActivity extends Activity {
 		String buildingSelected = b_s.getBuildingName(
 				(int) intent.getIntExtra(MainActivity.BUILDING_NAME_HASH, defaultVal) );
 		
-//		if(findViewById(R.id.school_selected_title) != null) {    			
-//			((TextView) findViewById(R.id.school_selected_title)).setText(buildingSelected );
 		if(DEBUG) Log.d("BuildingActivity", "buildingSelected: "+ buildingSelected);
 	    TextView buildingText = new TextView(this);
 	    buildingText.setText(buildingSelected );
-	    LinearLayout linearL = new LinearLayout(this);
-	    linearL.setBackgroundColor(Color.CYAN);
-	    linearL.addView(buildingText);
-	    addContentView(linearL, new ViewGroup.LayoutParams (
+	    
+	    LinearLayout buildingNameLay = new LinearLayout(this);
+	    buildingNameLay.setBackgroundColor(Color.CYAN);
+	    buildingNameLay.addView(buildingText);
+	    
+	    LinearLayout mainLayout = new LinearLayout(this);
+	    mainLayout.setOrientation(LinearLayout.VERTICAL);
+	    mainLayout.addView(buildingNameLay, new ViewGroup.LayoutParams (
         		ViewGroup.LayoutParams.WRAP_CONTENT, 
         		ViewGroup.LayoutParams.WRAP_CONTENT));
-//		}
-//		else
-//			if(DEBUG) Log.e("BuildingActivity", "findV schoolSelected null ");
-
+	    
 	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
 	            LayoutParams.WRAP_CONTENT);
 	    TableLayout layoutINNER = new TableLayout(this);
@@ -118,8 +117,13 @@ public class BuildingActivity extends Activity {
 	    
 //	    removeView(findViewById(R.id.school_selected_title));
 	    
+		mainLayout.addView(layoutINNER, params);
+
+		addContentView(mainLayout, new ViewGroup.LayoutParams (
+        		ViewGroup.LayoutParams.WRAP_CONTENT, 
+        		ViewGroup.LayoutParams.WRAP_CONTENT));
+
 //		addContentView(findViewById(R.id.school_selected_title), params );
-		addContentView(layoutINNER, params);
 
 //		LinearLayout main = (LinearLayout)findViewById(R.layout.activity_building);
 //	    if(main != null) {
