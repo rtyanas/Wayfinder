@@ -2,7 +2,7 @@ package com.mobileappdev.wayfinder;
 
 import java.util.ArrayList;
 
-import com.mobileappdev.wayfinder.Buildings.BuildingNameIcon;
+import com.mobileappdev.wayfinder.BuildingNameIcon;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -30,7 +30,7 @@ public class SearchableActivity extends ListActivity {
                    (appData != null ? appData.get(MainActivity.SEARCH_DATA) : "") );
         buildingL = new Buildings();
         filteredL = new ArrayList<BuildingNameIcon>(); 
-        filteredL.add(buildingL.new BuildingNameIcon("Computer Science", 1));
+        filteredL.add(new BuildingNameIcon("Computer Science", 1));
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
         handleIntent(getIntent());
     }
@@ -49,7 +49,7 @@ public class SearchableActivity extends ListActivity {
             //use the query to search your data somehow
             filteredL = buildingL.filteredBuildingList(query);
             if(filteredL.size() <= 1) {
-            	filteredL.add(buildingL.new BuildingNameIcon("Computer Science", 1));
+            	filteredL.add(new BuildingNameIcon("Computer Science", 1));
             }
             Log.d("SearchableActivity", "query: "+ query);
             setListAdapter(new MyAdapter());
