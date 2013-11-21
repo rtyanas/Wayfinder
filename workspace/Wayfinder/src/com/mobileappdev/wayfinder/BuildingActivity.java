@@ -24,16 +24,10 @@ public class BuildingActivity extends Activity {
 
 		setContentView(R.layout.activity_building);
 
-		//		findViewById(R.layout.activity_building).setOnClickListener(new View.OnClickListener() {
-//			
-//            @Override
-//            public void onClick(View view) {
-//				Log.d("BuildingActivity", "In - onClick");
-//			}
-//		});
+	    LinearLayout mainLayout = new LinearLayout(this);
+	    mainLayout.setOrientation(LinearLayout.VERTICAL);
 		
-		Buildings b_s = new Buildings();
-
+	    Buildings b_s = new Buildings();
 		int defaultVal=0;
 		Intent intent = getIntent();
 		String buildingSelected = b_s.getBuildingName(
@@ -45,15 +39,13 @@ public class BuildingActivity extends Activity {
 	    
 	    LinearLayout buildingNameLay = new LinearLayout(this);
 	    buildingNameLay.setBackgroundColor(Color.CYAN);
+	    buildingNameLay.setHorizontalGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
 	    buildingNameLay.addView(buildingText);
 	    
-	    LinearLayout mainLayout = new LinearLayout(this);
-	    mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    mainLayout.addView(buildingNameLay, new ViewGroup.LayoutParams (
         		ViewGroup.LayoutParams.MATCH_PARENT, 
         		ViewGroup.LayoutParams.WRAP_CONTENT));
-	    
-	    
+	    	    
 	    BuildingLayoutGenerator buildingLa = new BuildingLayoutGenerator(15,9,this);
 	    
 	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,  //.FILL_PARENT,
