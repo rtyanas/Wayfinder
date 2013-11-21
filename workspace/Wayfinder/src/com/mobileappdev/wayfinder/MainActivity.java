@@ -1,6 +1,8 @@
 package com.mobileappdev.wayfinder;
 
-import com.mobileappdev.wayfinder.Buildings.BuildingNameIcon;
+import java.util.List;
+
+import com.mobileappdev.wayfinder.BuildingNameIcon;
 import com.mobileappdev.wayfinder.BuildingActivity;
 
 import android.os.Bundle;
@@ -33,6 +35,20 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        BuildingDbData bDB = new BuildingDbData(this);
+        bDB.open();
+	    Buildings b_s = new Buildings();
+	    for(BuildingNameIcon bni : b_s.getBuildings()) {
+	        bDB.createBuilding(bni.getHashCode(), bni.getBuildingName(), bni.getDrawable());	    	
+	    }
+
+	    List<BuildingNameIcon> allDb = bDB.getAllBuildings();
+	    for(BuildingNameIcon b : allDb) {
+	    	Log.d("MainActivity", "DB Values: "+ b.getBuildingName() +
+	    			","+ b.drawable +","+ b.hashCode());
+	    }
+	    
         mainThis = this;
         // gets the activity's default ActionBar
         ActionBar actionBar = getActionBar();
