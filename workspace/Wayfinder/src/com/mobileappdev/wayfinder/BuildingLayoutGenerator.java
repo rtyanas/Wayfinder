@@ -1,6 +1,7 @@
 package com.mobileappdev.wayfinder;
 
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -29,17 +30,19 @@ public class BuildingLayoutGenerator {
 	    		new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, 
 	    				                  TableRow.LayoutParams.WRAP_CONTENT);
 
-	    TextView tv = null;
+	    ImageView iv = null;
 	    TableRow tr = null;
 		for(int row=1; row <= rows; row++) {
 		    tr = new TableRow(thisBuildAct);
 		    tr.setLayoutParams(params);
 
 			for(int col=1; col <= columns; col++) {
-			    tv = new TextView(thisBuildAct);
-			    tv.setLayoutParams(trparams);
-			    tv.setText(row+"/"+col +", ");
-			    tr.addView(tv);
+			    iv = new ImageView(thisBuildAct);
+			    iv.setLayoutParams(trparams);
+			    iv.setImageResource(R.drawable.allison_road_classroom_building_3878_sm);
+			    // tv.setText(row+"/"+col +", ");
+			    
+			    tr.addView(iv);
 			}
 			tableRet.addView(tr);
 		}
