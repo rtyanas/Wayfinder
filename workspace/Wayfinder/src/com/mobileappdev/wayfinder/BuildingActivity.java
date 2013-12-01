@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -46,11 +47,18 @@ public class BuildingActivity extends Activity {
         		ViewGroup.LayoutParams.MATCH_PARENT, 
         		ViewGroup.LayoutParams.WRAP_CONTENT));
 	    	    
-	    BuildingLayoutGenerator buildingLa = new BuildingLayoutGenerator(15,9,this);
+	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(13,8,this);
+		buildingLO.generateTableLayout();
+	    
+	    // setBuildingInternalStructure(buildingLO);
+		setBuildingInternalStructure(
+				buildingLO, R.drawable.allison_road_classroom_building_3878_sm, 5, 5);
+		setBuildingInternalStructure(
+				buildingLO, R.drawable.livingston_student_center_4160, 8, 5);
 	    
 	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,  //.FILL_PARENT,
 	            LayoutParams.WRAP_CONTENT);
-		mainLayout.addView(buildingLa.generateTableLayout(), params);
+		mainLayout.addView(buildingLO.getTableLO(), params);
 
 		addContentView(mainLayout, new ViewGroup.LayoutParams (
         		ViewGroup.LayoutParams.WRAP_CONTENT, 
@@ -71,5 +79,45 @@ public class BuildingActivity extends Activity {
 		getMenuInflater().inflate(R.menu.building, menu);
 		return true;
 	}
+
+	
+    private void setBuildingInternalStructure(
+    		BuildingLayoutGenerator buildingLA_in, int drawable_in, int row, int column) {
+    	int rowCnt = buildingLA_in.getTableLO().getChildCount();
+    	int columnCnt = 0;
+    	
+    	if(rowCnt > 0) {
+    		columnCnt = 
+    				((TableRow)(buildingLA_in.getTableLO().getChildAt(0))).getChildCount();
+    		if(row < rowCnt && column < columnCnt) {
+    			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(row);
+    			ImageView iv = (ImageView)rowChild.getChildAt(column);
+    			iv.setImageResource(drawable_in);
+    		}
+    		
+    	}
+    }
+    
+    
+    private void setBuildingInternalStructure(BuildingLayoutGenerator buildingLA) {
+    	
+    	int tableChildCnt = buildingLA.getTableLO().getChildCount();
+    	View rowChild ;
+    	View cellChild ;
+    	int cellCount = 0;
+    	for(int i = 0; i < tableChildCnt; i++) {
+    		rowChild = buildingLA.getTableLO().getChildAt(i);
+    		if(rowChild instanceof TableRow) {
+    			cellCount = ((TableRow) rowChild).getChildCount();
+    			for(int j = 0; j < cellCount; j++) {
+    				cellChild = ((TableRow) rowChild).getChildAt(j);
+    				if(cellChild instanceof ImageView) {
+    					Log.d("BuildingActivity", "setBuildingInternalStructure, found cell");
+    				}
+    			}
+    			
+    		}
+    	}
+    }
 
 }
