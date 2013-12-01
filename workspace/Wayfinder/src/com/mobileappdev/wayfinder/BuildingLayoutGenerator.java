@@ -12,6 +12,8 @@ public class BuildingLayoutGenerator {
 	private int rows;
 	private int columns;
 	
+	TableLayout tableLO;
+	
 	BuildingActivity thisBuildAct;
 	
 	public BuildingLayoutGenerator(int rows_in, int columns_in, 
@@ -23,7 +25,7 @@ public class BuildingLayoutGenerator {
 	}
 	
 	public TableLayout generateTableLayout() {
-		TableLayout tableRet = new TableLayout(thisBuildAct);
+		tableLO = new TableLayout(thisBuildAct);
 	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
 	            LayoutParams.WRAP_CONTENT);
 	    TableRow.LayoutParams trparams = 
@@ -39,15 +41,25 @@ public class BuildingLayoutGenerator {
 			for(int col=1; col <= columns; col++) {
 			    iv = new ImageView(thisBuildAct);
 			    iv.setLayoutParams(trparams);
-			    iv.setImageResource(R.drawable.allison_road_classroom_building_3878_sm);
+			    iv.setImageResource(R.drawable.square_filler_sm);
 			    // tv.setText(row+"/"+col +", ");
 			    
 			    tr.addView(iv);
 			}
-			tableRet.addView(tr);
+			tableLO.addView(tr);
 		}
 		
-		return tableRet;
+		return tableLO;
 	}
+
+	public TableLayout getTableLO() {
+		return tableLO;
+	}
+
+	public void setTableLO(TableLayout tableLO) {
+		this.tableLO = tableLO;
+	}
+	
+	
 	
 }
