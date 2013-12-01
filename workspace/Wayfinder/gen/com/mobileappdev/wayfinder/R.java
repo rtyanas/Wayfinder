@@ -33,8 +33,10 @@ public final class R {
         public static final int sc_bush_icon=0x7f020009;
         public static final int sc_douglas_icon=0x7f02000a;
         public static final int sc_livingston_icon=0x7f02000b;
-        public static final int student_activities_center_3123=0x7f02000c;
-        public static final int university_centerat_easton_avenue_3154=0x7f02000d;
+        public static final int square_filler=0x7f02000c;
+        public static final int square_filler_sm=0x7f02000d;
+        public static final int student_activities_center_3123=0x7f02000e;
+        public static final int university_centerat_easton_avenue_3154=0x7f02000f;
     }
     public static final class id {
         public static final int action_add=0x7f090006;
