@@ -25,13 +25,15 @@ public class Buildings {
     	
     	Vector<OneIconDef> floorPlan = new Vector<OneIconDef>();
     	BuildingNameIcon bni = new BuildingNameIcon();
-    	OneIconDef oneIcon = bni.new OneIconDef(1, 4, R.drawable.exit);
+    	OneIconDef oneIcon = bni.new OneIconDef(0, 4, R.drawable.exit);
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new  OneIconDef(2, 4, R.drawable.elevator);
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new  OneIconDef(2, 6, R.drawable.dining);
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new  OneIconDef(3, 5, R.drawable.restroom);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new  OneIconDef(5, 0, R.drawable.exit);
     	floorPlan.add(oneIcon);
     	this.getBuilding(liv.hashCode()).setFloorPlan(floorPlan);
     	
@@ -40,7 +42,9 @@ public class Buildings {
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new OneIconDef(3, 6, R.drawable.stairs);
     	floorPlan.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(1, 6, R.drawable.exit);
+    	oneIcon = bni.new OneIconDef(0, 6, R.drawable.exit);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(4, 0, R.drawable.exit);
     	floorPlan.add(oneIcon);
     	this.getBuilding(sac.hashCode()).setFloorPlan(floorPlan);
     	
@@ -49,7 +53,9 @@ public class Buildings {
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new OneIconDef(6, 7, R.drawable.stairs);
     	floorPlan.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(1, 5, R.drawable.exit);
+    	oneIcon = bni.new OneIconDef(0, 5, R.drawable.exit);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(2, 0, R.drawable.exit);
     	floorPlan.add(oneIcon);
     	this.getBuilding(uce.hashCode()).setFloorPlan(floorPlan);
 
