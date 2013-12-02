@@ -1,5 +1,7 @@
 package com.mobileappdev.wayfinder;
 
+import java.util.Vector;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -31,12 +33,12 @@ public class BuildingActivity extends Activity {
 	    Buildings b_s = new Buildings();
 		int defaultVal=0;
 		Intent intent = getIntent();
-		String buildingSelected = b_s.getBuildingName(
+		BuildingNameIcon buildingSelected = b_s.getBuilding(
 				(int) intent.getIntExtra(MainActivity.BUILDING_NAME_HASH, defaultVal) );
 		
 		if(DEBUG) Log.d("BuildingActivity", "buildingSelected: "+ buildingSelected);
 	    TextView buildingText = new TextView(this);
-	    buildingText.setText(buildingSelected );
+	    buildingText.setText(buildingSelected.getBuildingName() );
 	    
 	    LinearLayout buildingNameLay = new LinearLayout(this);
 	    buildingNameLay.setBackgroundColor(Color.CYAN);
@@ -52,9 +54,7 @@ public class BuildingActivity extends Activity {
 	    
 	    // setBuildingInternalStructure(buildingLO);
 		setBuildingInternalStructure(
-				buildingLO, R.drawable.allison_road_classroom_building_3878_sm, 5, 5);
-		setBuildingInternalStructure(
-				buildingLO, R.drawable.livingston_student_center_4160, 8, 5);
+				buildingLO, buildingSelected.getFloorPlan());
 	    
 	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,  //.FILL_PARENT,
 	            LayoutParams.WRAP_CONTENT);
@@ -82,19 +82,25 @@ public class BuildingActivity extends Activity {
 
 	
     private void setBuildingInternalStructure(
-    		BuildingLayoutGenerator buildingLA_in, int drawable_in, int row, int column) {
+    		BuildingLayoutGenerator buildingLA_in, 
+    		Vector<BuildingNameIcon.OneIconDef> iconList) {
     	int rowCnt = buildingLA_in.getTableLO().getChildCount();
     	int columnCnt = 0;
     	
-    	if(rowCnt > 0) {
-    		columnCnt = 
-    				((TableRow)(buildingLA_in.getTableLO().getChildAt(0))).getChildCount();
-    		if(row < rowCnt && column < columnCnt) {
-    			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(row);
-    			ImageView iv = (ImageView)rowChild.getChildAt(column);
-    			iv.setImageResource(drawable_in);
-    		}
-    		
+    	for(BuildingNameIcon.OneIconDef oneIcon : iconList) {
+        	if(rowCnt > oneIcon.getRow()) {
+        		columnCnt = 
+        				((TableRow)(buildingLA_in.getTableLO().getChildAt(oneIcon.getRow()))).getChildCount();
+        		if( columnCnt > oneIcon.getColumn()) {
+        			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(oneIcon.getRow());
+        			ImageView iv = (ImageView)rowChild.getChildAt(oneIcon.getRow());
+        			iv.setImageResource(oneIcon.getDrawable());
+        		}
+        		else {
+        			Log.e("BuildingActivity", "setBuildingInternalStructure: row or column out of bounds.");
+        		}
+        		
+        	}    		
     	}
     }
     
