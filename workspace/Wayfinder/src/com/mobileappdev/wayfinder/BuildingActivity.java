@@ -93,7 +93,7 @@ public class BuildingActivity extends Activity {
         				((TableRow)(buildingLA_in.getTableLO().getChildAt(oneIcon.getRow()))).getChildCount();
         		if( columnCnt > oneIcon.getColumn()) {
         			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(oneIcon.getRow());
-        			ImageView iv = (ImageView)rowChild.getChildAt(oneIcon.getRow());
+        			ImageView iv = (ImageView)rowChild.getChildAt(oneIcon.getColumn());
         			iv.setImageResource(oneIcon.getDrawable());
         		}
         		else {
