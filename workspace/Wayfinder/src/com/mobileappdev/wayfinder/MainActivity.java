@@ -71,21 +71,21 @@ public class MainActivity extends Activity {
 	        });
 		}
 
-		Button cancelBut = new Button(this);
-		cancelBut.setText("Cancel");
-		cancelBut.setBackgroundColor(Color.YELLOW);
-        
-        cancelBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//		Button cancelBut = new Button(this);
+//		cancelBut.setText("Cancel");
+//		cancelBut.setBackgroundColor(Color.YELLOW);
+//        
+//        cancelBut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
 		
         RelativeLayout myLayout = new RelativeLayout(this);
         myLayout.setBackgroundColor(Color.BLUE);
      
-        myLayout.addView(cancelBut);
+//        myLayout.addView(cancelBut);
         addContentView (myLayout, new ViewGroup.LayoutParams (
         		ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
