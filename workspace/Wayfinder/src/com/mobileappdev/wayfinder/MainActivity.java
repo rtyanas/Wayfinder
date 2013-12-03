@@ -36,18 +36,22 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        BuildingDbData bDB = new BuildingDbData(this);
-        bDB.open();
-	    Buildings b_s = new Buildings();
-	    for(BuildingNameIcon bni : b_s.getBuildings()) {
-	        bDB.createBuilding(bni.getHashCode(), bni.getBuildingName(), bni.getDrawable());	    	
-	    }
+        buildingSelection = new BuildingNameIcon("", R.drawable.sc_bush_icon);
 
-	    List<BuildingNameIcon> allDb = bDB.getAllBuildings();
-	    for(BuildingNameIcon b : allDb) {
-	    	Log.d("MainActivity", "DB Values: "+ b.getBuildingName() +
-	    			","+ b.drawable +","+ b.hashCode());
-	    }
+        /**** Database test code ****/
+//        BuildingDbData bDB = new BuildingDbData(this);
+//        bDB.open();
+//	    Buildings b_s = new Buildings();
+//	    for(BuildingNameIcon bni : b_s.getBuildings()) {
+//	        bDB.createBuilding(bni.getHashCode(), bni.getBuildingName(), bni.getDrawable());	    	
+//	    }
+//
+//	    List<BuildingNameIcon> allDb = bDB.getAllBuildings();
+//	    for(BuildingNameIcon b : allDb) {
+//	    	Log.d("MainActivity", "DB Values: "+ b.getBuildingName() +
+//	    			","+ b.drawable +","+ b.hashCode());
+//	    }
+	    /****************/
 	    
         mainThis = this;
         // gets the activity's default ActionBar
@@ -70,22 +74,10 @@ public class MainActivity extends Activity {
 	            }
 	        });
 		}
-
-//		Button cancelBut = new Button(this);
-//		cancelBut.setText("Cancel");
-//		cancelBut.setBackgroundColor(Color.YELLOW);
-//        
-//        cancelBut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//            }
-//        });
 		
         RelativeLayout myLayout = new RelativeLayout(this);
         myLayout.setBackgroundColor(Color.BLUE);
      
-//        myLayout.addView(cancelBut);
         addContentView (myLayout, new ViewGroup.LayoutParams (
         		ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -162,9 +154,7 @@ public class MainActivity extends Activity {
     	Log.d("MainActivity", "buildingSelection: "+ 
     	(buildingSelection != null ? buildingSelection.getBuildingName() : "") );
     	
-    	int buildingIcon = R.drawable.arc_building;
-
-    	if(this.getCurrentFocus() != null) {
+    	if(this.getWindow() != null) {
     		View v = getWindow().getDecorView();
     		if(v != null && v.findViewById(R.id.school_icon) != null) {    			
     			((ImageView) v.findViewById(R.id.school_icon)).setImageResource(buildingSelection.getDrawable());
@@ -175,7 +165,7 @@ public class MainActivity extends Activity {
     		}
     	}
     	else
-    		Log.d("MainActivity", "getCurrentFocus() is null");
+    		Log.d("MainActivity", "getWindow() is null");
         // ((ImageView) rootView.findViewById(R.id.weather_predominant_icon)).setImageResource(weatherIcon);
     }
     
