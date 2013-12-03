@@ -9,6 +9,7 @@
     <string name="search_hint">Search Building Name</string>
     <string name="action_bar_search">Building Search</string>
     <string name="search_global_description">Global Search</string>
+    <string name="done_home">Done</string>
     
     
 </resources>
