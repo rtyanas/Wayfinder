@@ -14,7 +14,7 @@ public class BuildingDbHelper  extends SQLiteOpenHelper {
 	  public static final String COLUMN_BUILDING_RESTROOM_ICON = "building_restroom_icon";
 
 	  private static final String DATABASE_NAME = "wayfinder.db";
-	  private static final int DATABASE_VERSION = 2;
+	  private static final int DATABASE_VERSION = 3;
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE = "create table "
