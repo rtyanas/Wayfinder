@@ -28,21 +28,24 @@ public final class R {
         public static final int dining=0x7f020004;
         public static final int elevator=0x7f020005;
         public static final int exit=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int ic_menu_refresh=0x7f020008;
-        public static final int ic_menu_save=0x7f020009;
-        public static final int livingston_student_center_4160=0x7f02000a;
-        public static final int menu_icon=0x7f02000b;
-        public static final int restroom=0x7f02000c;
-        public static final int sc_bush_icon=0x7f02000d;
-        public static final int sc_douglas_icon=0x7f02000e;
-        public static final int sc_livingston_icon=0x7f02000f;
-        public static final int square_filler=0x7f020010;
-        public static final int square_filler_sm=0x7f020011;
-        public static final int stairs=0x7f020012;
-        public static final int student_activities_center_3123=0x7f020013;
-        public static final int university_centerat_easton_avenue_3154=0x7f020014;
-        public static final int vending_machine=0x7f020015;
+        public static final int handicap=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int ic_menu_refresh=0x7f020009;
+        public static final int ic_menu_save=0x7f02000a;
+        public static final int livingston_student_center_4160=0x7f02000b;
+        public static final int menu_icon=0x7f02000c;
+        public static final int restroom=0x7f02000d;
+        public static final int rutgershield=0x7f02000e;
+        public static final int sc_bush_icon=0x7f02000f;
+        public static final int sc_douglas_icon=0x7f020010;
+        public static final int sc_livingston_icon=0x7f020011;
+        public static final int square_filler=0x7f020012;
+        public static final int square_filler_sm=0x7f020013;
+        public static final int stairs=0x7f020014;
+        public static final int student_activities_center_3123=0x7f020015;
+        public static final int university_centerat_easton_avenue_3154=0x7f020016;
+        public static final int vending_machine=0x7f020017;
+        public static final int wifi_sm=0x7f020018;
     }
     public static final class id {
         public static final int action_add=0x7f090006;
@@ -52,7 +55,7 @@ public final class R {
         public static final int action_settings=0x7f090009;
         public static final int action_share=0x7f090008;
         public static final int campus_map=0x7f090001;
-        public static final int go_back=0x7f090000;
+        public static final int done_building=0x7f090000;
         public static final int item_refresh=0x7f09000a;
         public static final int item_save=0x7f09000b;
         public static final int options_menu_main_search=0x7f09000c;
@@ -77,6 +80,7 @@ public final class R {
         public static final int action_bar_search=0x7f060006;
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int done_home=0x7f060008;
         public static final int go_back_to_main=0x7f060004;
         public static final int hello_world=0x7f060002;
         public static final int search_global_description=0x7f060007;
