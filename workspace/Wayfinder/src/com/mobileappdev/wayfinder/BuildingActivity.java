@@ -49,16 +49,24 @@ public class BuildingActivity extends Activity {
         		ViewGroup.LayoutParams.MATCH_PARENT, 
         		ViewGroup.LayoutParams.WRAP_CONTENT));
 	    	    
-	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(13,8,this);
+	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(12,9,this);
 		buildingLO.generateTableLayout();
 	    
 	    // setBuildingInternalStructure(buildingLO);
 		setBuildingInternalStructure(
 				buildingLO, buildingSelected.getFloorPlan());
+		
 	    
 	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,  //.FILL_PARENT,
 	            LayoutParams.WRAP_CONTENT);
 		mainLayout.addView(buildingLO.getTableLO(), params);
+
+        findViewById(R.id.done_building).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 		addContentView(mainLayout, new ViewGroup.LayoutParams (
         		ViewGroup.LayoutParams.WRAP_CONTENT, 
