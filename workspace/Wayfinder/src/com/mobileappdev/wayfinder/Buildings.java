@@ -31,6 +31,10 @@ public class Buildings {
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new  OneIconDef(2, 6, R.drawable.dining);
     	floorPlan.add(oneIcon);
+    	oneIcon = bni.new  OneIconDef(3, 7, R.drawable.wifi_sm);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(3, 4, R.drawable.handicap);
+    	floorPlan.add(oneIcon);
     	oneIcon = bni.new  OneIconDef(3, 5, R.drawable.restroom);
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new  OneIconDef(5, 0, R.drawable.exit);
@@ -39,6 +43,8 @@ public class Buildings {
     	
     	floorPlan = new Vector<OneIconDef>();
     	oneIcon = bni.new OneIconDef(4, 5, R.drawable.restroom);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(4, 6, R.drawable.handicap);
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new OneIconDef(3, 6, R.drawable.stairs);
     	floorPlan.add(oneIcon);
@@ -50,6 +56,8 @@ public class Buildings {
     	
     	floorPlan = new Vector<OneIconDef>();
     	oneIcon = bni.new OneIconDef(4, 6, R.drawable.restroom);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(4, 7, R.drawable.handicap);
     	floorPlan.add(oneIcon);
     	oneIcon = bni.new OneIconDef(6, 7, R.drawable.stairs);
     	floorPlan.add(oneIcon);
