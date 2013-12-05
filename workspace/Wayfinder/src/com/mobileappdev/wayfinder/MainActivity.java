@@ -16,11 +16,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,9 @@ public class MainActivity extends Activity {
 	public final static String SEARCH_DATA= "SearchData";
 	public static BuildingNameIcon buildingSelection = null;
 	public static String BUILDING_NAME_HASH = "BUILDING_NAME";
+	Button buttonSchoolV;
+	static Buildings b_s;
+	TextView buildingText;
 	MainActivity mainThis;
 	
     @Override
@@ -38,7 +45,10 @@ public class MainActivity extends Activity {
         
         buildingSelection = new BuildingNameIcon("", R.drawable.sc_bush_icon);
 
-        /**** Database test code ****/
+	    LinearLayout mainLayout = new LinearLayout(this);
+	    mainLayout.setOrientation(LinearLayout.VERTICAL);
+
+	    /**** Database test code ****/
 //        BuildingDbData bDB = new BuildingDbData(this);
 //        bDB.open();
 //	    Buildings b_s = new Buildings();
@@ -58,7 +68,7 @@ public class MainActivity extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.show();
         
-        View buttonSchoolV = findViewById(R.id.school_icon);
+        buttonSchoolV = new Button(this);
 		if( buttonSchoolV == null) { 
 			Log.e("MainActivity", "Button is null");
 		}
@@ -75,11 +85,37 @@ public class MainActivity extends Activity {
 	        });
 		}
 		
+	    b_s = new Buildings();
+
+		BuildingNameIcon buildingSelected = b_s.getBuilding("Student Union - Bush".hashCode() );
+		
+	    buildingText = new TextView(this);
+	    buildingText.setText(buildingSelected.getBuildingName() );
+	    
+	    LinearLayout buildingNameLay = new LinearLayout(this);
+	    buildingNameLay.setBackgroundColor(Color.CYAN);
+	    buildingNameLay.setHorizontalGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
+	    buildingNameLay.addView(buildingText);
+	    
+	    mainLayout.addView(buildingNameLay, new ViewGroup.LayoutParams (
+        		ViewGroup.LayoutParams.MATCH_PARENT, 
+        		ViewGroup.LayoutParams.WRAP_CONTENT));
+	    	    
+	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(8,5,1,this);
+		buildingLO.generateTableLayout();
+		
+		setBuildingsOnPath(buildingLO);
+		
         RelativeLayout myLayout = new RelativeLayout(this);
         myLayout.setBackgroundColor(Color.BLUE);
      
-        addContentView (myLayout, new ViewGroup.LayoutParams (
-        		ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,  //.FILL_PARENT,
+	            LayoutParams.WRAP_CONTENT);
+		mainLayout.addView(buildingLO.getTableLO(), params);
+
+		addContentView(mainLayout, new ViewGroup.LayoutParams (
+        		ViewGroup.LayoutParams.WRAP_CONTENT, 
+        		ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // set the app icon as an action to go home
         // we are home so we don't need it
@@ -155,10 +191,10 @@ public class MainActivity extends Activity {
     	(buildingSelection != null ? buildingSelection.getBuildingName() : "") );
     	
     	if(this.getWindow() != null) {
-    		View v = getWindow().getDecorView();
-    		if(v != null && v.findViewById(R.id.school_icon) != null) {    			
-    			((ImageView) v.findViewById(R.id.school_icon)).setImageResource(buildingSelection.getDrawable());
-    			((TextView) v.findViewById(R.id.school_selected_title)).setText(buildingSelection.getBuildingName());
+
+    		if(buttonSchoolV != null ) {    			
+    			((Button) buttonSchoolV).setBackgroundResource(buildingSelection.getDrawable());
+    			buildingText.setText(buildingSelection.getBuildingName());
     		}
     		else {
         		Log.d("MainActivity", "getWindow().getDecorView() or findViewById(R.id.imageButton1) is null");    			
@@ -190,7 +226,60 @@ public class MainActivity extends Activity {
     	Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
         
-    
 
+    private void setBuildingsOnPath(BuildingLayoutGenerator buildingLA_in) {
+		BuildingNameIcon buildingSelected;
+
+    	setAbuildingDetails(buildingLA_in,4,3,"Student Union - Livingston");
+
+    	setAbuildingDetails(buildingLA_in,2,1,"Student Activities Center_3123");
+
+    	setAbuildingDetails(buildingLA_in,6,3,"Allison Road Classroom Building_3878");
+
+    	setAbuildingDetails(buildingLA_in,1,3,"Student Union - Douglas");
+
+    }
+    
+    
+    private void setAbuildingDetails(BuildingLayoutGenerator buildingLA_in,
+    		int row_in, int column_in, String buildingName) {
+    
+    	int rowCnt = buildingLA_in.getTableLO().getChildCount();
+    	int columnCnt = 0;
+
+    	if(rowCnt > row_in) {
+    		columnCnt = 
+    				((TableRow)(buildingLA_in.getTableLO().getChildAt(row_in))).getChildCount();
+    		if( columnCnt > column_in) {
+    			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(row_in);
+    			Button b = (Button)rowChild.getChildAt(column_in);
+    			b.setBackgroundResource(b_s.getBuilding(buildingName.hashCode()).getDrawable());
+    			b.setOnClickListener(new ButtonClickListener(buildingName));
+    		}
+    		else {
+    			Log.e("MainActivity", "setAbuildingDetails: column out of bounds.");
+    		}
+    	}    		
+		else {
+			Log.e("MainActivity", "setAbuildingDetails: row out of bounds.");
+		}
+
+    }
+
+    public class ButtonClickListener implements OnClickListener {
+    	String building;
+    	public ButtonClickListener(String building_in)  {
+    		building = building_in;
+    	}
+    	
+    	@Override
+    	public void onClick(View v) {
+    		Intent intent = new Intent(mainThis, BuildingActivity.class); // new Intent(this, BuildingActivity.class);
+    		// int buildingSel = buildingSelected_in != null ? buildingSelected_in.getBuildingName().hashCode() : 0;
+    		intent.putExtra(BUILDING_NAME_HASH, building.toString().hashCode() );
+    		startActivity(intent);
+    		
+    	}
+    }
 
 }
