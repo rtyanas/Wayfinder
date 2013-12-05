@@ -1,6 +1,9 @@
 package com.mobileappdev.wayfinder;
 
+import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -11,15 +14,17 @@ public class BuildingLayoutGenerator {
 	
 	private int rows;
 	private int columns;
+	private int cellType;
 	
 	TableLayout tableLO;
 	
-	BuildingActivity thisBuildAct;
+	Context thisBuildAct;
 	
-	public BuildingLayoutGenerator(int rows_in, int columns_in, 
-			BuildingActivity thisBuildAct_in ) {
+	public BuildingLayoutGenerator(int rows_in, int columns_in, int cellType_in,
+			Context thisBuildAct_in ) {
 		rows = rows_in;
 		columns = columns_in;
+		cellType = cellType_in;
 		
 		thisBuildAct = thisBuildAct_in;
 	}
@@ -32,16 +37,23 @@ public class BuildingLayoutGenerator {
 	    		new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, 
 	    				                  TableRow.LayoutParams.WRAP_CONTENT);
 
-	    ImageView iv = null;
+	    View iv = null;
 	    TableRow tr = null;
 		for(int row=1; row <= rows; row++) {
 		    tr = new TableRow(thisBuildAct);
 		    tr.setLayoutParams(params);
 
 			for(int col=1; col <= columns; col++) {
-			    iv = new ImageView(thisBuildAct);
-			    iv.setLayoutParams(trparams);
-			    iv.setImageResource(R.drawable.square_filler_sm);
+				if(cellType == 0) {
+				    iv = new ImageView(thisBuildAct);
+				    iv.setLayoutParams(trparams);
+				    ((ImageView)iv).setImageResource(R.drawable.square_filler_sm);					
+				}
+				else if(cellType == 1) {
+				    iv = new Button(thisBuildAct);
+				    iv.setLayoutParams(trparams);
+				    ((Button)iv).setBackgroundResource(R.drawable.road_section);					
+				}
 			    // tv.setText(row+"/"+col +", ");
 			    
 			    tr.addView(iv);
