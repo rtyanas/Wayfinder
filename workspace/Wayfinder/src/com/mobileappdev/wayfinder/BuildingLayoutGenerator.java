@@ -52,11 +52,14 @@ public class BuildingLayoutGenerator {
 				else if(cellType == 1) {
 				    iv = new Button(thisBuildAct);
 				    iv.setLayoutParams(trparams);
-				    ((Button)iv).setBackgroundResource(R.drawable.road_section);					
+					if(col != 2 && col != 4) // put road when not building row.
+						((Button)iv).setBackgroundResource(R.drawable.road_section);
+					else // set green  between buildings
+						((Button)iv).setBackgroundColor( -16711936); // green
 				}
 			    // tv.setText(row+"/"+col +", ");
 			    
-			    tr.addView(iv);
+				tr.addView(iv);
 			}
 			tableLO.addView(tr);
 		}
