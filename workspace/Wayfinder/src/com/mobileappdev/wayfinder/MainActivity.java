@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 	TextView buildingText;
 	MainActivity mainThis;
 	BuildingLayoutGenerator buildingLO;
+	enum PathAction {Draw, Erase};
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +143,7 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu( Menu menu )
     {
         getMenuInflater().inflate( R.menu.search_menu, menu );
+        getMenuInflater().inflate( R.menu.main, menu );
 
         // Add SearchWidget.
         SearchManager searchManager = (SearchManager) getSystemService( Context.SEARCH_SERVICE );
@@ -190,7 +192,7 @@ public class MainActivity extends Activity {
     			((Button) buildingSelButton).setBackgroundResource(buildingSelection.getDrawable());
     			buildingText.setText(buildingSelection.getBuildingName());
     			if( buildingSelection_old != buildingSelection) {
-    				addPath(buildingLO);
+    				addPath(buildingLO, PathAction.Draw);
     			}
     	        buildingSelection_old = buildingSelection;
     		}
@@ -208,8 +210,9 @@ public class MainActivity extends Activity {
   	public boolean onOptionsItemSelected(MenuItem item){
     	// same as using a normal menu
     	switch(item.getItemId()) {
-    	case R.id.item_refresh:
-    		makeToast("Refreshing...");
+    	case R.id.resetPath:
+    		addPath(buildingLO, PathAction.Erase);
+    		makeToast("Reset Path");
     		break;
     	case R.id.item_save:
     		makeToast("Saving...");
@@ -315,18 +318,32 @@ public class MainActivity extends Activity {
     }
 
     
-    private void addPath(BuildingLayoutGenerator buildingLA_in) {
+    private void addPath(BuildingLayoutGenerator buildingLA_in, 
+    		             PathAction pathAction) {
     	Vector<OneIconDef> path = new Vector<OneIconDef>();
     	BuildingNameIcon bni = new BuildingNameIcon();
-    	OneIconDef oneIcon = bni.new OneIconDef(1, 2, R.drawable.road_with_path_end_right);
+    	int roadPath, roadPathEnd, roadPathStart;
+    	
+    	if(pathAction == PathAction.Draw) {
+    		roadPath = R.drawable.road_with_path;
+    		roadPathEnd = R.drawable.road_with_path_start;
+    		roadPathStart = R.drawable.road_with_path_end_right;
+    	}
+    	else {
+    		roadPath = R.drawable.road_section;
+    		roadPathEnd = R.drawable.road_section;
+    		roadPathStart = R.drawable.road_section;
+    	}
+    	
+    	OneIconDef oneIcon = bni.new OneIconDef(1, 2, roadPathStart);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(2, 2, R.drawable.road_with_path);
+    	oneIcon = bni.new OneIconDef(2, 2, roadPath);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(3, 2, R.drawable.road_with_path);
+    	oneIcon = bni.new OneIconDef(3, 2, roadPath);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(4, 2, R.drawable.road_with_path);
+    	oneIcon = bni.new OneIconDef(4, 2, roadPath);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(5, 2, R.drawable.road_with_path_start);
+    	oneIcon = bni.new OneIconDef(5, 2, roadPathEnd);
     	path.add(oneIcon);
 		
 		BuildingActivity.setBuildingInternalStructure(buildingLA_in, path, TableCellType.buttonType);
