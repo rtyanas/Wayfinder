@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 public class BuildingActivity extends Activity {
 
 	boolean DEBUG = true;
+
+	static enum TableCellType { imageType, buttonType };
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +52,12 @@ public class BuildingActivity extends Activity {
         		ViewGroup.LayoutParams.MATCH_PARENT, 
         		ViewGroup.LayoutParams.WRAP_CONTENT));
 	    	    
-	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(12,9,0,this);
+	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(10,9,0,this);
 		buildingLO.generateTableLayout();
 	    
 	    // setBuildingInternalStructure(buildingLO);
 		setBuildingInternalStructure(
-				buildingLO, buildingSelected.getFloorPlan());
+				buildingLO, buildingSelected.getFloorPlan(), TableCellType.imageType);
 
 	    LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,  //.FILL_PARENT,
 	            LayoutParams.WRAP_CONTENT);
@@ -89,9 +92,10 @@ public class BuildingActivity extends Activity {
 	}
 
 	
-    private void setBuildingInternalStructure(
+    public static void setBuildingInternalStructure(
     		BuildingLayoutGenerator buildingLA_in, 
-    		Vector<BuildingNameIcon.OneIconDef> iconList) {
+    		Vector<BuildingNameIcon.OneIconDef> iconList,
+    		TableCellType cellType) {
     	int rowCnt = buildingLA_in.getTableLO().getChildCount();
     	int columnCnt = 0;
     	
@@ -101,8 +105,14 @@ public class BuildingActivity extends Activity {
         				((TableRow)(buildingLA_in.getTableLO().getChildAt(oneIcon.getRow()))).getChildCount();
         		if( columnCnt > oneIcon.getColumn()) {
         			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(oneIcon.getRow());
-        			ImageView iv = (ImageView)rowChild.getChildAt(oneIcon.getColumn());
-        			iv.setImageResource(oneIcon.getDrawable());
+        			if(cellType == TableCellType.imageType ) {
+            			ImageView iv = (ImageView)rowChild.getChildAt(oneIcon.getColumn());
+            			iv.setImageResource(oneIcon.getDrawable());        				
+        			}
+        			else if(cellType == TableCellType.buttonType) {
+            			Button b = (Button)rowChild.getChildAt(oneIcon.getColumn());
+            			b.setBackgroundResource(oneIcon.getDrawable());        				        				
+        			}
         		}
         		else {
         			Log.e("BuildingActivity", "setBuildingInternalStructure: row or column out of bounds.");
