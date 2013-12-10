@@ -20,7 +20,7 @@ public class Buildings {
     	
 
     	buildings = new ArrayList<BuildingNameIcon>();
-    	buildings.add(new BuildingNameIcon(sub, R.drawable.sc_bush_icon) );
+    	buildings.add(new BuildingNameIcon(sub, R.drawable.bld_bush_studentcenter) );
     	buildings.add(new BuildingNameIcon(sul, R.drawable.bld_livingston_studentcenter) );
     	buildings.add(new BuildingNameIcon(sud, R.drawable.bld_douglas_studentcenter) );
     	buildings.add(new BuildingNameIcon(arc, R.drawable.bld_allison_rd_classroom) );
