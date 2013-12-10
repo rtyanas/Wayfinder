@@ -1,9 +1,12 @@
 package com.mobileappdev.wayfinder;
 
 import java.util.List;
+import java.util.Vector;
 
 import com.mobileappdev.wayfinder.BuildingNameIcon;
 import com.mobileappdev.wayfinder.BuildingActivity;
+import com.mobileappdev.wayfinder.BuildingActivity.TableCellType;
+import com.mobileappdev.wayfinder.BuildingNameIcon.OneIconDef;
 
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -31,19 +34,22 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	public final static String SEARCH_DATA= "SearchData";
-	public static BuildingNameIcon buildingSelection = null;
+	public static BuildingNameIcon buildingSelection = null, buildingSelection_old;
+	private Button buildingSelButton;
 	public static String BUILDING_NAME_HASH = "BUILDING_NAME";
 	Button buttonSchoolV;
 	static Buildings b_s;
 	TextView buildingText;
 	MainActivity mainThis;
+	BuildingLayoutGenerator buildingLO;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        buildingSelection = new BuildingNameIcon("", R.drawable.sc_bush_icon);
+        buildingSelection = new BuildingNameIcon("", R.drawable.bld_default);
+        buildingSelection_old = buildingSelection;
 
 	    LinearLayout mainLayout = new LinearLayout(this);
 	    mainLayout.setOrientation(LinearLayout.VERTICAL);
@@ -101,10 +107,10 @@ public class MainActivity extends Activity {
         		ViewGroup.LayoutParams.MATCH_PARENT, 
         		ViewGroup.LayoutParams.WRAP_CONTENT));
 	    	    
-	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(8,5,1,this);
+	    buildingLO = new BuildingLayoutGenerator(8,5,1,this);
 		buildingLO.generateTableLayout();
 		
-		setBuildingsOnPath(buildingLO);
+		setBuildingsOnCampus(buildingLO);
 		
         RelativeLayout myLayout = new RelativeLayout(this);
         myLayout.setBackgroundColor(Color.BLUE);
@@ -170,18 +176,6 @@ public class MainActivity extends Activity {
     	else {
     		Log.d("MainActivity", "Result NOT OK " +", "+ data.getStringExtra("THEKEY"));
     	}
-
-    	
-    	
-//    	  switch(requestCode) { 
-//    	    case (STATIC_INTEGER_VALUE) : { 
-//    	      if (resultCode == Activity.RESULT_OK) { 
-//    	      String newText = data.getStringExtra(PUBLIC_STATIC_STRING_IDENTIFIER);
-//    	      // TODO Update your TextView.
-//    	      } 
-//    	      break; 
-//    	    } 
-//    	  } 
     }
 
     @Override
@@ -192,9 +186,13 @@ public class MainActivity extends Activity {
     	
     	if(this.getWindow() != null) {
 
-    		if(buttonSchoolV != null ) {    			
-    			((Button) buttonSchoolV).setBackgroundResource(buildingSelection.getDrawable());
+    		if(buildingSelButton != null ) {    			
+    			((Button) buildingSelButton).setBackgroundResource(buildingSelection.getDrawable());
     			buildingText.setText(buildingSelection.getBuildingName());
+    			if( buildingSelection_old != buildingSelection) {
+    				addPath(buildingLO);
+    			}
+    	        buildingSelection_old = buildingSelection;
     		}
     		else {
         		Log.d("MainActivity", "getWindow().getDecorView() or findViewById(R.id.imageButton1) is null");    			
@@ -227,7 +225,7 @@ public class MainActivity extends Activity {
     }
         
 
-    private void setBuildingsOnPath(BuildingLayoutGenerator buildingLA_in) {
+    private void setBuildingsOnCampus(BuildingLayoutGenerator buildingLA_in) {
 		BuildingNameIcon buildingSelected;
 
     	setAbuildingDetails(buildingLA_in,4,3,"Student Union - Livingston");
@@ -236,10 +234,60 @@ public class MainActivity extends Activity {
 
     	setAbuildingDetails(buildingLA_in,6,3,"Allison Road Classroom Building_3878");
 
-    	setAbuildingDetails(buildingLA_in,1,3,"Student Union - Douglas");
+    	setAbuildingDetails(buildingLA_in,1,3,buttonSchoolV);
 
     }
     
+    
+    private void setAbuildingDetails(BuildingLayoutGenerator buildingLA_in,
+    		int row_in, int column_in, Button buildingIcon) {
+    
+    	int rowCnt = buildingLA_in.getTableLO().getChildCount();
+    	int columnCnt = 0;
+
+    	if(rowCnt > row_in) {
+    		columnCnt = 
+    				((TableRow)(buildingLA_in.getTableLO().getChildAt(row_in))).getChildCount();
+    		if( columnCnt > column_in) {
+    			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(row_in);
+    			buildingSelButton = (Button)rowChild.getChildAt(column_in);
+    			buildingSelButton.setOnClickListener(new View.OnClickListener() {
+    	            @Override
+    	            public void onClick(View view) {
+    	            	
+    	        		Intent intent = new Intent(mainThis, BuildingActivity.class); // new Intent(this, BuildingActivity.class);
+    	        		int buildingSel = buildingSelection != null ? buildingSelection.getBuildingName().hashCode() : 0;
+    	        		intent.putExtra(BUILDING_NAME_HASH, buildingSel);
+    	        		startActivity(intent);
+    	            }
+    	        });
+    		}
+    		else {
+    			Log.e("MainActivity", "setAbuildingDetails: column out of bounds.");
+    		}
+    	}    		
+		else {
+			Log.e("MainActivity", "setAbuildingDetails: row out of bounds.");
+		}
+
+    }
+
+    public class ButtonClickListener implements OnClickListener {
+    	String building;
+    	public ButtonClickListener(String building_in)  {
+    		building = building_in;
+    	}
+    	
+    	@Override
+    	public void onClick(View v) {
+    		Intent intent = new Intent(mainThis, BuildingActivity.class); // new Intent(this, BuildingActivity.class);
+    		// int buildingSel = buildingSelected_in != null ? buildingSelected_in.getBuildingName().hashCode() : 0;
+    		intent.putExtra(BUILDING_NAME_HASH, building.toString().hashCode() );
+    		startActivity(intent);
+    		
+    	}
+    }
+
     
     private void setAbuildingDetails(BuildingLayoutGenerator buildingLA_in,
     		int row_in, int column_in, String buildingName) {
@@ -266,20 +314,22 @@ public class MainActivity extends Activity {
 
     }
 
-    public class ButtonClickListener implements OnClickListener {
-    	String building;
-    	public ButtonClickListener(String building_in)  {
-    		building = building_in;
-    	}
-    	
-    	@Override
-    	public void onClick(View v) {
-    		Intent intent = new Intent(mainThis, BuildingActivity.class); // new Intent(this, BuildingActivity.class);
-    		// int buildingSel = buildingSelected_in != null ? buildingSelected_in.getBuildingName().hashCode() : 0;
-    		intent.putExtra(BUILDING_NAME_HASH, building.toString().hashCode() );
-    		startActivity(intent);
-    		
-    	}
+    
+    private void addPath(BuildingLayoutGenerator buildingLA_in) {
+    	Vector<OneIconDef> path = new Vector<OneIconDef>();
+    	BuildingNameIcon bni = new BuildingNameIcon();
+    	OneIconDef oneIcon = bni.new OneIconDef(1, 2, R.drawable.road_with_path_end_right);
+    	path.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(2, 2, R.drawable.road_with_path);
+    	path.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(3, 2, R.drawable.road_with_path);
+    	path.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(4, 2, R.drawable.road_with_path);
+    	path.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(5, 2, R.drawable.road_with_path_start);
+    	path.add(oneIcon);
+		
+		BuildingActivity.setBuildingInternalStructure(buildingLA_in, path, TableCellType.buttonType);
     }
 
 }
