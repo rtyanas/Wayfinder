@@ -1,6 +1,7 @@
 package com.mobileappdev.wayfinder;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -53,9 +54,9 @@ public class BuildingLayoutGenerator {
 				    iv = new Button(thisBuildAct);
 				    iv.setLayoutParams(trparams);
 					if(col != 2 && col != 4) // put road when not building row.
-						((Button)iv).setBackgroundResource(R.drawable.road_section);
+						((Button)iv).setBackgroundColor(Color.TRANSPARENT); // .setBackgroundResource(R.drawable.road_section);
 					else // set green  between buildings
-						((Button)iv).setBackgroundColor( -16711936); // green
+						((Button)iv).setBackgroundColor(Color.TRANSPARENT); //  -16711936); // green
 				}
 			    // tv.setText(row+"/"+col +", ");
 			    
