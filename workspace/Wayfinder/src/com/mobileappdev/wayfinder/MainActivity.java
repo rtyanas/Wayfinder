@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -109,7 +110,10 @@ public class MainActivity extends Activity {
         		ViewGroup.LayoutParams.WRAP_CONTENT));
 	    	    
 	    buildingLO = new BuildingLayoutGenerator(8,5,1,this);
-		buildingLO.generateTableLayout();
+	    TableLayout tlo = buildingLO.generateTableLayout();
+
+		tlo.setBackgroundResource( R.drawable.background_map);
+
 		
 		setBuildingsOnCampus(buildingLO);
 		
@@ -235,7 +239,7 @@ public class MainActivity extends Activity {
 
     	setAbuildingDetails(buildingLA_in,2,1,"Student Activities Center_3123");
 
-    	setAbuildingDetails(buildingLA_in,6,3,"Allison Road Classroom Building_3878");
+    	setAbuildingDetails(buildingLA_in,5,2,"Allison Road Classroom Building_3878");
 
     	setAbuildingDetails(buildingLA_in,1,3,buttonSchoolV);
 
@@ -326,8 +330,8 @@ public class MainActivity extends Activity {
     	
     	if(pathAction == PathAction.Draw) {
     		roadPath = R.drawable.road_with_path;
-    		roadPathEnd = R.drawable.road_with_path_start;
-    		roadPathStart = R.drawable.road_with_path_end_right;
+    		roadPathEnd = R.drawable.road_with_path_end_right;
+    		roadPathStart = R.drawable.road_with_path_start;
     	}
     	else {
     		roadPath = R.drawable.road_section;
@@ -335,15 +339,15 @@ public class MainActivity extends Activity {
     		roadPathStart = R.drawable.road_section;
     	}
     	
-    	OneIconDef oneIcon = bni.new OneIconDef(1, 2, roadPathStart);
+    	OneIconDef oneIcon = bni.new OneIconDef(1, 2, roadPathEnd);
     	path.add(oneIcon);
     	oneIcon = bni.new OneIconDef(2, 2, roadPath);
     	path.add(oneIcon);
     	oneIcon = bni.new OneIconDef(3, 2, roadPath);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(4, 2, roadPath);
+    	oneIcon = bni.new OneIconDef(4, 0, roadPath);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(5, 2, roadPathEnd);
+    	oneIcon = bni.new OneIconDef(5, 0, roadPathStart);
     	path.add(oneIcon);
 		
 		BuildingActivity.setBuildingInternalStructure(buildingLA_in, path, TableCellType.buttonType);
