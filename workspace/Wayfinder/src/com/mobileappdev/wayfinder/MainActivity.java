@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        buildingSelection = new BuildingNameIcon("", R.drawable.bld_default);
+        buildingSelection = new BuildingNameIcon("", R.drawable.road_with_transparent);
         buildingSelection_old = buildingSelection;
 
 	    LinearLayout mainLayout = new LinearLayout(this);
@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
     	if(this.getWindow() != null) {
 
     		if(buildingSelButton != null ) {    			
-    			((Button) buildingSelButton).setBackgroundResource(buildingSelection.getDrawable());
+    			((Button) buildingSelButton).setBackgroundResource( buildingSelection.getDrawable());
     			buildingText.setText(buildingSelection.getBuildingName());
     			if( buildingSelection_old != buildingSelection) {
     				addPath(buildingLO, PathAction.Draw);
@@ -237,10 +237,19 @@ public class MainActivity extends Activity {
 
     	setAbuildingDetails(buildingLA_in,4,3,"Student Union - Livingston");
 
-    	setAbuildingDetails(buildingLA_in,2,1,"Student Activities Center_3123");
+    	setAbuildingDetails(buildingLA_in,2,1,"Cell DNA Repository");
 
-    	setAbuildingDetails(buildingLA_in,5,2,"Allison Road Classroom Building_3878");
+    	setAbuildingDetails(buildingLA_in,4,0,"Allison Road Classroom Building_3878");
 
+    	setAbuildingDetails(buildingLA_in,4,2,"bus stop");
+
+    	setAbuildingDetails(buildingLA_in,6,0,"parking");
+
+    	setAbuildingDetails(buildingLA_in,5,3,"Rutgers Univ Bush Campus Center");
+
+    	setAbuildingDetails(buildingLA_in,6,3,"Physics Lecture Hall");
+
+    	
     	setAbuildingDetails(buildingLA_in,1,3,buttonSchoolV);
 
     }
@@ -289,9 +298,17 @@ public class MainActivity extends Activity {
     	public void onClick(View v) {
     		Intent intent = new Intent(mainThis, BuildingActivity.class); // new Intent(this, BuildingActivity.class);
     		// int buildingSel = buildingSelected_in != null ? buildingSelected_in.getBuildingName().hashCode() : 0;
-    		intent.putExtra(BUILDING_NAME_HASH, building.toString().hashCode() );
-    		startActivity(intent);
     		
+    		if(building.equals("bus stop")) {
+    	    	Toast.makeText(mainThis, "Next bus is late", Toast.LENGTH_SHORT).show();    			
+    		} 
+    		else if(building.equals("parking")) {
+    	    	Toast.makeText(mainThis, "This lot is full", Toast.LENGTH_SHORT).show();    			
+    		} 
+    		else {
+	    		intent.putExtra(BUILDING_NAME_HASH, building.toString().hashCode() );
+	    		startActivity(intent);
+    		}
     	}
     }
 
@@ -308,7 +325,7 @@ public class MainActivity extends Activity {
     		if( columnCnt > column_in) {
     			TableRow rowChild = (TableRow)buildingLA_in.getTableLO().getChildAt(row_in);
     			Button b = (Button)rowChild.getChildAt(column_in);
-    			b.setBackgroundResource(b_s.getBuilding(buildingName.hashCode()).getDrawable());
+    			b.setBackgroundResource(R.drawable.road_with_transparent); // b_s.getBuilding(buildingName.hashCode()).getDrawable());
     			b.setOnClickListener(new ButtonClickListener(buildingName));
     		}
     		else {
@@ -326,26 +343,31 @@ public class MainActivity extends Activity {
     		             PathAction pathAction) {
     	Vector<OneIconDef> path = new Vector<OneIconDef>();
     	BuildingNameIcon bni = new BuildingNameIcon();
-    	int roadPath, roadPathEnd, roadPathStart;
+    	int roadPath, roadPath22, roadPath45, roadPath90, roadPathEnd, roadPathStart;
     	
     	if(pathAction == PathAction.Draw) {
     		roadPath = R.drawable.road_with_path;
+    		roadPath22 = R.drawable.road_with_path_rotate_22;
+    		roadPath45 = R.drawable.road_with_path_rotate_45;
+    		roadPath90 = R.drawable.road_with_path_rotate_90;
     		roadPathEnd = R.drawable.road_with_path_end_right;
     		roadPathStart = R.drawable.road_with_path_start;
     	}
     	else {
-    		roadPath = R.drawable.road_section;
-    		roadPathEnd = R.drawable.road_section;
-    		roadPathStart = R.drawable.road_section;
+    		
+    		roadPath = R.drawable.road_with_transparent;
+    		roadPath22 = R.drawable.road_with_transparent;
+    		roadPath45 = R.drawable.road_with_transparent;
+    		roadPath90 = R.drawable.road_with_transparent;
+    		roadPathEnd = R.drawable.road_with_transparent;
+    		roadPathStart = R.drawable.road_with_transparent;
     	}
     	
-    	OneIconDef oneIcon = bni.new OneIconDef(1, 2, roadPathEnd);
+    	OneIconDef oneIcon = bni.new OneIconDef(2, 3, roadPath22);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(2, 2, roadPath);
+    	oneIcon = bni.new OneIconDef(3, 2, roadPath45);
     	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(3, 2, roadPath);
-    	path.add(oneIcon);
-    	oneIcon = bni.new OneIconDef(4, 0, roadPath);
+    	oneIcon = bni.new OneIconDef(4, 1, roadPath45);
     	path.add(oneIcon);
     	oneIcon = bni.new OneIconDef(5, 0, roadPathStart);
     	path.add(oneIcon);
