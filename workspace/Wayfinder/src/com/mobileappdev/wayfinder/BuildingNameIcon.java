@@ -5,6 +5,7 @@ import java.util.Vector;
 public class BuildingNameIcon {
 	String buildingName;
 	int drawable;
+	int drawableFloorPlan;
 	int hashCode;
 	Vector<OneIconDef> floorPlan = new Vector<OneIconDef> ();
 	
@@ -18,6 +19,13 @@ public class BuildingNameIcon {
     	buildingName = buildN_in;
     	drawable = draw_in;
     	hashCode = buildingName.hashCode();
+	}
+	
+	public BuildingNameIcon (String buildN_in, int draw_in, int drawFloor_in) {
+    	buildingName = buildN_in;
+    	drawable = draw_in;
+    	hashCode = buildingName.hashCode();
+    	drawableFloorPlan = drawFloor_in;
 	}
 	
 	public Vector<OneIconDef> getFloorPlan() {
@@ -53,6 +61,17 @@ public class BuildingNameIcon {
 	}
 	
 	
+	public int getDrawableFloorPlan() {
+		return drawableFloorPlan;
+	}
+
+	public void setDrawableFloorPlan(int drawableFloorPlan) {
+		this.drawableFloorPlan = drawableFloorPlan;
+	}
+
+
+
+
 	class OneIconDef {
 		int row, column;
 		int drawable;
