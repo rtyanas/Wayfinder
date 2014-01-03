@@ -45,18 +45,22 @@ public final class R {
         public static final int road_section=0x7f020015;
         public static final int road_with_path=0x7f020016;
         public static final int road_with_path_end_right=0x7f020017;
-        public static final int road_with_path_start=0x7f020018;
-        public static final int rutgershield=0x7f020019;
-        public static final int sc_bush_icon=0x7f02001a;
-        public static final int sc_douglas_icon=0x7f02001b;
-        public static final int sc_livingston_icon=0x7f02001c;
-        public static final int square_filler=0x7f02001d;
-        public static final int square_filler_sm=0x7f02001e;
-        public static final int stairs=0x7f02001f;
-        public static final int student_activities_center_3123=0x7f020020;
-        public static final int university_centerat_easton_avenue_3154=0x7f020021;
-        public static final int vending_machine=0x7f020022;
-        public static final int wifi_sm=0x7f020023;
+        public static final int road_with_path_rotate_22=0x7f020018;
+        public static final int road_with_path_rotate_45=0x7f020019;
+        public static final int road_with_path_rotate_90=0x7f02001a;
+        public static final int road_with_path_start=0x7f02001b;
+        public static final int road_with_transparent=0x7f02001c;
+        public static final int rutgershield=0x7f02001d;
+        public static final int sc_bush_icon=0x7f02001e;
+        public static final int sc_douglas_icon=0x7f02001f;
+        public static final int sc_livingston_icon=0x7f020020;
+        public static final int square_filler=0x7f020021;
+        public static final int square_filler_sm=0x7f020022;
+        public static final int stairs=0x7f020023;
+        public static final int student_activities_center_3123=0x7f020024;
+        public static final int university_centerat_easton_avenue_3154=0x7f020025;
+        public static final int vending_machine=0x7f020026;
+        public static final int wifi_sm=0x7f020027;
     }
     public static final class id {
         public static final int action_add=0x7f090004;
