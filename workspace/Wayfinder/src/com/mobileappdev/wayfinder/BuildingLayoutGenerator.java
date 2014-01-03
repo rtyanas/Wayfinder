@@ -48,7 +48,7 @@ public class BuildingLayoutGenerator {
 				if(cellType == 0) {
 				    iv = new ImageView(thisBuildAct);
 				    iv.setLayoutParams(trparams);
-				    ((ImageView)iv).setImageResource(R.drawable.square_filler_sm);					
+				    ((ImageView)iv).setImageResource(R.drawable.transparent);
 				}
 				else if(cellType == 1) {
 				    iv = new Button(thisBuildAct);
