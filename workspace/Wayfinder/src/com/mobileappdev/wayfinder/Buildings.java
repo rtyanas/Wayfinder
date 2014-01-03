@@ -10,13 +10,14 @@ public class Buildings {
     private ArrayList<BuildingNameIcon> buildings;
 
     public Buildings() {
-    	String liv = "Livingston Student Center_4160";
+    	String liv = "Cell DNA Repository";
     	String sac = "Student Activities Center_3123";
     	String uce = "University Center at Easton Avenue_3154";
-    	String sub = "Student Union - Bush";
+    	String sub = "Rutgers Univ Bush Campus Center";
     	String sul = "Student Union - Livingston";
-    	String sud = "Student Union - Douglas";
+    	String sud = "Physics Lecture Hall";
     	String arc = "Allison Road Classroom Building_3878";
+    	String cpe = "Center for Packaging Engineering";
     	
 
     	buildings = new ArrayList<BuildingNameIcon>();
@@ -27,6 +28,7 @@ public class Buildings {
     	buildings.add(new BuildingNameIcon(liv, R.drawable.livingston_student_center_4160) );
     	buildings.add(new BuildingNameIcon(sac, R.drawable.bld_student_activitycenter) );
     	buildings.add(new BuildingNameIcon(uce, R.drawable.university_centerat_easton_avenue_3154) );
+    	buildings.add(new BuildingNameIcon(cpe, R.drawable.university_centerat_easton_avenue_3154) );
     	
     	Vector<OneIconDef> floorPlan = new Vector<OneIconDef>();
     	BuildingNameIcon bni = new BuildingNameIcon();
@@ -58,6 +60,19 @@ public class Buildings {
     	oneIcon = bni.new OneIconDef(4, 0, R.drawable.exit);
     	floorPlan.add(oneIcon);
     	this.getBuilding(sac.hashCode()).setFloorPlan(floorPlan);
+    	
+    	floorPlan = new Vector<OneIconDef>();
+    	oneIcon = bni.new OneIconDef(4, 5, R.drawable.restroom);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(4, 6, R.drawable.handicap);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(3, 6, R.drawable.stairs);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(0, 6, R.drawable.exit);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(4, 0, R.drawable.exit);
+    	floorPlan.add(oneIcon);
+    	this.getBuilding(sub.hashCode()).setFloorPlan(floorPlan);
     	
     	floorPlan = new Vector<OneIconDef>();
     	oneIcon = bni.new OneIconDef(4, 6, R.drawable.restroom);
@@ -97,6 +112,19 @@ public class Buildings {
     	oneIcon = bni.new OneIconDef(5, 0, R.drawable.exit);
     	floorPlan.add(oneIcon);
     	this.getBuilding(arc.hashCode()).setFloorPlan(floorPlan);
+
+    	floorPlan = new Vector<OneIconDef>();
+    	oneIcon = bni.new OneIconDef(6, 3, R.drawable.restroom);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(6, 4, R.drawable.handicap);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(1, 7, R.drawable.stairs);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(0, 2, R.drawable.exit);
+    	floorPlan.add(oneIcon);
+    	oneIcon = bni.new OneIconDef(5, 0, R.drawable.exit);
+    	floorPlan.add(oneIcon);
+    	this.getBuilding(cpe.hashCode()).setFloorPlan(floorPlan);
 
     }
     
