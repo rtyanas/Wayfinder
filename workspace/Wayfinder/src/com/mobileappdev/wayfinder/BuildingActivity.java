@@ -53,7 +53,8 @@ public class BuildingActivity extends Activity {
         		ViewGroup.LayoutParams.WRAP_CONTENT));
 	    	    
 	    BuildingLayoutGenerator buildingLO = new BuildingLayoutGenerator(10,9,0,this);
-		buildingLO.generateTableLayout();
+		TableLayout tlo = buildingLO.generateTableLayout();
+		tlo.setBackgroundResource(buildingSelected.getDrawableFloorPlan());
 	    
 	    // setBuildingInternalStructure(buildingLO);
 		setBuildingInternalStructure(
