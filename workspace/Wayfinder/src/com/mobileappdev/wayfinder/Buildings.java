@@ -21,14 +21,14 @@ public class Buildings {
     	
 
     	buildings = new ArrayList<BuildingNameIcon>();
-    	buildings.add(new BuildingNameIcon(sub, R.drawable.bld_bush_studentcenter) );
-    	buildings.add(new BuildingNameIcon(sul, R.drawable.bld_livingston_studentcenter) );
-    	buildings.add(new BuildingNameIcon(sud, R.drawable.bld_douglas_studentcenter) );
-    	buildings.add(new BuildingNameIcon(arc, R.drawable.bld_allison_rd_classroom) );
-    	buildings.add(new BuildingNameIcon(liv, R.drawable.livingston_student_center_4160) );
-    	buildings.add(new BuildingNameIcon(sac, R.drawable.bld_student_activitycenter) );
-    	buildings.add(new BuildingNameIcon(uce, R.drawable.university_centerat_easton_avenue_3154) );
-    	buildings.add(new BuildingNameIcon(cpe, R.drawable.university_centerat_easton_avenue_3154) );
+    	buildings.add(new BuildingNameIcon(sub, R.drawable.bld_bush_studentcenter, R.drawable.floorplan1) );
+    	buildings.add(new BuildingNameIcon(sul, R.drawable.bld_livingston_studentcenter, R.drawable.floorplan2) );
+    	buildings.add(new BuildingNameIcon(sud, R.drawable.bld_douglas_studentcenter, R.drawable.floorplan3) );
+    	buildings.add(new BuildingNameIcon(arc, R.drawable.bld_allison_rd_classroom, R.drawable.floorplan4) );
+    	buildings.add(new BuildingNameIcon(liv, R.drawable.livingston_student_center_4160, R.drawable.floorplan2) );
+    	buildings.add(new BuildingNameIcon(sac, R.drawable.bld_student_activitycenter, R.drawable.floorplan4) );
+    	buildings.add(new BuildingNameIcon(uce, R.drawable.university_centerat_easton_avenue_3154, R.drawable.floorplan3) );
+    	buildings.add(new BuildingNameIcon(cpe, R.drawable.university_centerat_easton_avenue_3154, R.drawable.floorplan1) );
     	
     	Vector<OneIconDef> floorPlan = new Vector<OneIconDef>();
     	BuildingNameIcon bni = new BuildingNameIcon();
